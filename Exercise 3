@@ -7,7 +7,7 @@ def ctrapezoidal(f, a, b, n):
     h=(b-a)/n
     return (h/2)*(f(a)+f(b)) + h*s(f,a,b,n)
 
-p = lambda x: 6*x**2
+p = lambda x: 2*x
 
 Ih=[]
 b=1
@@ -15,10 +15,17 @@ a=0
 n=100
 I=1
 
-for n in range (1,n):
-    a=abs(ctrapezoidal(p, 0, 1, n)-I)
-    Ih.append(a)
+for n in range (2,n):
+    k=abs(ctrapezoidal(p, 0, 1, n)-I)
+    Ih.append(k)
 
 hlist=[]
 for n in range (1,n):
     hlist.append((b-a)/n)
+    
+print(hlist)
+print(Ih)
+
+plot(hlist,Ih,'ro')
+
+#vet inte hur man använder loglog, men annars borde det bara rätt. plotten ser typ ut som log
