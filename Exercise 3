@@ -21,4 +21,4 @@ for n in range (1,n):
 
 hlist=[]
 for n in range (1,n):
-    hlist.append(b-a/n)
+    hlist.append((b-a)/n)
