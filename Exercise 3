@@ -1,0 +1,17 @@
+Ih=[]
+p = lambda x: 6*x**2
+b=1
+a=0
+n=100
+I=1
+for n in range (1,n):
+    a=abs(ctrapezoidal(p, 0, 1, n)-I)
+    Ih.append(a)
+
+print(Ih)
+
+hlist=[]
+for n in range (1,n):
+    hlist.append(b-a/n)
+
+print(hlist)
