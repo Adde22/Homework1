@@ -1,3 +1,9 @@
+Separated:
+
+from scipy import *
+from matplotlib.pyplot import loglog
+%matplotlib inline  
+
 def ctrapezoidal(f, a, b, n):
     def s(f,a,b,n):
         x=0
@@ -8,25 +14,49 @@ def ctrapezoidal(f, a, b, n):
     return (h/2)*(f(a)+f(b)) + h*s(f,a,b,n)
 
 p = lambda x: 2*x
-
-Ih=[]
 b=1
 a=0
-n=100
+n=20
 I=1
 
-for n in range (2,n):
-    k=abs(ctrapezoidal(p, 0, 1, n)-I)
+for n in range (0,n):
+    Ih=[]
+    k=abs(ctrapezoidal(p, 0, 1, 2**n)-I)
     Ih.append(k)
 
-hlist=[]
-for n in range (1,n):
-    hlist.append((b-a)/n)
+for n in range (n):
+    hlist=[]
+    t=(b-a)/(2**n)
+    hlist.append(t)
     
-print(hlist)
-print(Ih)
+loglog(hlist,Ih,'ro')
 
-plot(hlist,Ih,'ro')
+Function:
+
+from scipy import *
+from matplotlib.pyplot import loglog
+%matplotlib inline  
+
+
+def accplot(f,a,b,n,I):
+    def isum(f,a,b,n):
+        x=0
+        for i in range(1,n-1):
+            x=f(a+(i/n)*(b-a)) + x
+        return x
+    def ctrapezoidal(f, a, b, n):
+        h=(b-a)/n
+        return (h/2)*(f(a)+f(b)) + h*isum(f,a,b,n)
+    def loop(f,a,b,n):
+        for n in range (n):
+            hlist=[]
+            t=(b-a)/(2**n)
+            hlist.append(t)
+        for n in range (n):
+            Ih=[]
+            k=abs(ctrapezoidal(p, 0, 1, 2**n)-I)
+            Ih.append(k)
+    loglog(hlist,Ih,'ro')
 
 
 
