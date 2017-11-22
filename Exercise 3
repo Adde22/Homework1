@@ -28,4 +28,8 @@ print(Ih)
 
 plot(hlist,Ih,'ro')
 
+
+
 #vet inte hur man använder loglog, men annars borde det bara rätt. plotten ser typ ut som log
+# byt till att det blir n=1,2,4,8 genom 2^x. detta ger rn rak linje eftersom att log tar ned x
+
