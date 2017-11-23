@@ -1,65 +1,28 @@
-Separated:
-
 from scipy import *
 from matplotlib.pyplot import loglog
 %matplotlib inline  
-
-def ctrapezoidal(f, a, b, n):
-    def s(f,a,b,n):
-        x=0
-        for i in range(1,n-1):
-            x=f(a+(i/n)*(b-a)) + x
-        return x
-    h=(b-a)/n
-    return (h/2)*(f(a)+f(b)) + h*s(f,a,b,n)
-
-p = lambda x: 2*x
-b=1
-a=0
-n=20
-I=1
-
-for n in range (0,n):
-    Ih=[]
-    k=abs(ctrapezoidal(p, 0, 1, 2**n)-I)
-    Ih.append(k)
-
-for n in range (n):
-    hlist=[]
-    t=(b-a)/(2**n)
-    hlist.append(t)
-    
-loglog(hlist,Ih,'ro')
-
-Function:
-
-from scipy import *
-from matplotlib.pyplot import loglog
-%matplotlib inline  
-
 
 def accplot(f,a,b,n,I):
-    def isum(f,a,b,n):
-        x=0
-        for i in range(1,n-1):
-            x=f(a+(i/n)*(b-a)) + x
-        return x
     def ctrapezoidal(f, a, b, n):
+        def s(f,a,b,n):
+            x=0
+            for i in range(1,n-1):
+                x=f(a+(i/n)*(b-a)) + x
+            return x
         h=(b-a)/n
-        return (h/2)*(f(a)+f(b)) + h*isum(f,a,b,n)
-    def loop(f,a,b,n):
-        for n in range (n):
-            hlist=[]
-            t=(b-a)/(2**n)
-            hlist.append(t)
-        for n in range (n):
-            Ih=[]
-            k=abs(ctrapezoidal(p, 0, 1, 2**n)-I)
-            Ih.append(k)
+        return (h/2)*(f(a)+f(b)) + h*s(f,a,b,n)
+    Ih=[]
+    hlist=[]
+    for v in range (n):
+        t=(b-a)/(2**v)
+        hlist.append(t)
+    for v in range (n):
+        k=abs(ctrapezoidal(p, 0, 1, 2**v)-I)
+        Ih.append(k)
     loglog(hlist,Ih,'ro')
+    
+p=lambda x:2*x
+accplot(p,0,1,10,1)
 
 
-
-#vet inte hur man använder loglog, men annars borde det bara rätt. plotten ser typ ut som log
-# byt till att det blir n=1,2,4,8 genom 2^x. detta ger rn rak linje eftersom att log tar ned x
 
