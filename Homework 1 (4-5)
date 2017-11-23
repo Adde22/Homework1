@@ -31,17 +31,5 @@ def interpoly(x,y):
 
 print(interpoly(array([1,0,2]),array([4,1,3]))
     
-note exercise 5:
-
-from scipy.linalg import solve
-from scipy import *
-from numpy import *
-
-y=array([4,1,3])
-u=y.reshape(len(y),1) 
-print(u)
-print(w)
-solve(w,u)
-
 #add error messages to everything and maybe remove array in function
     
