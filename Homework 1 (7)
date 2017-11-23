@@ -1,0 +1,33 @@
+from scipy.linalg import solve
+from scipy import *
+from numpy import *
+%matplotlib inline  
+
+
+def polyval(x,y,z):
+    N=len(x)
+    b=0
+    def c(x,y):
+        N=len(x)
+        V=ones(len(x))
+        for i in range(1,N):
+            k=x**i
+            V=column_stack((k,V))
+        u=y.reshape(len(y),1)
+        return solve(V,u)
+    for j in range(1,N+1):
+        b=c(x,y)[-j,0]*z**(N-j) + b
+    return b
+
+L=linspace(0,3,100)
+ylist=[]
+for z in L:
+    x=array([0.0, 0.5, 1.0, 1.5, 2.0, 2.5])
+    y=array([-2.0, 0.5, -2.0, 1.0, -0.5, 1.0])
+    t=polyval(x,y,z)
+    ylist.append(t)
+
+plot(L,ylist,'b-')
+plot(x,y,'ro')
+
+#har kanske missupfattat denna fråga, eller någon av de tidigare. Förstår inte hur jag ska göra.
