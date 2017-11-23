@@ -1,0 +1,45 @@
+exercise 4 function:
+
+from scipy import *
+from numpy import *
+from scipy.linalg import solve
+
+def createx(v):
+    N=len(array(v))
+    w=ones(len(v))
+    for i in range(1,N):
+        k=array(v)**i
+        w=column_stack((k,w))
+    return w
+
+exercise 5 function:
+
+from scipy.linalg import solve
+from scipy import *
+from numpy import *
+
+def interpoly(v,y):
+    N=len(array(v))
+    w=ones(len(v))
+    for i in range(1,N):
+        k=array(v)**i
+        w=column_stack((k,w))
+    u=array(y).reshape(len(array(y)),1)
+    return solve(w,u)    
+
+print(interpoly([1,0,2],[4,1,3]))
+    
+note exercise 5:
+
+from scipy.linalg import solve
+from scipy import *
+from numpy import *
+
+y=array([4,1,3])
+u=y.reshape(len(y),1) 
+print(u)
+print(w)
+solve(w,u)
+
+#add error messages to everything and maybe remove array in function
+    
