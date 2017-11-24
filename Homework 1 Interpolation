@@ -43,6 +43,7 @@ from scipy.linalg import solve
 from scipy import *
 from numpy import *
 
+
 def polyval(x,y,z):
     def interpoly(x,y):
         def createV(x):
@@ -57,8 +58,8 @@ def polyval(x,y,z):
         return solve(V,u)
     N=len(x)
     b=0
-    for j in range(1,N+1):
-        b=interpoly(x,y)[-j,0]*z**(N-j) + b
+    for j in range(N): #z**((N-1)-i) since my N is actually N+1, but dont have to change in range since endpoint isnt included
+        b=interpoly(x,y)[j,0]*z**((N-1)-j) + b
         print(b)
     return b
 
@@ -79,6 +80,7 @@ from numpy import *
 from matplotlib.pyplot import *
 %matplotlib inline  
 
+
 def plotit(x,y,zlist):
     def polyval(x,y,z):
         def interpoly(x,y):
@@ -92,18 +94,17 @@ def plotit(x,y,zlist):
             V=createV(x)
             u=y.reshape(len(y),1)
             return solve(V,u)
+        
         N=len(x)
         b=0
-        for j in range(1,N+1):
-            b=interpoly(x,y)[-j,0]*z**(N-j) + b
+        for j in range(N): 
+            b=interpoly(x,y)[j,0]*z**((N-1)-j) + b
         return b
     ylist=[]
     for z in zlist:
         f=polyval(x,y,z)
         ylist.append(f)
         b=0
-    print(ylist)
-    print(zlist)
     plot(zlist,ylist)
     xlabel('z values')
     ylabel('p(z)')
