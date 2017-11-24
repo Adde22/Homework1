@@ -28,8 +28,7 @@ Exercise 3:
 
 from scipy import *
 from matplotlib import *
-from matplotlib.pyplot import plot
-from matplotlib.pyplot import loglog
+from matplotlib.pyplot import *
 %matplotlib inline  
 
 def accplot(f,a,b,n,I):
@@ -49,7 +48,13 @@ def accplot(f,a,b,n,I):
     for v in range (n):
         k=abs(ctrapezoidal(p, 0, 1, 2**v)-I)
         Ih.append(k)
-    loglog(hlist,Ih,'ro')
+    loglog(hlist,Ih,'bo')
+    loglog(hlist,Ih)
+    xlabel('log10(h)')
+    ylabel('log10(error)')
+    grid(True,which="both",ls="-")
+    show()
+
     
 p = lambda x: 2*x
 accplot(p,0,1,20,1)
