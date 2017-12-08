@@ -1,0 +1,594 @@
+#task 1 och 3:
+
+from scipy import *
+
+class interval:
+    def __init__ ( self , real1 , real2 ):
+        if isinstance ( real1, float) and isinstance ( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        elif isinstance( real1, float) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        else:
+            raise TypeError ('only integers and/or floats')
+    def __repr__ ( self ):
+        return '[{},{}]'. format (self.lower , self.upper)
+    
+q=interval(13.,-1.)
+print(q.lower)
+print(q.upper)
+print(q)
+
+#task 2:
+
+from scipy import *
+
+class interval:
+    def __init__ ( self , real1 , real2 ):
+        if isinstance ( real1, float) and isinstance ( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        elif isinstance( real1, float) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        else:
+            raise TypeError ('only integers and/or floats')
+    def __repr__ ( self ):
+        return '[{},{}]'. format (self.lower , self.upper)
+    def __add__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a+c,b+d)
+    def __sub__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a-d,b-c)
+    def __mul__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d))
+    def __truediv__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        elif c==0 or d==0:
+            raise TypeError('Cannot divide by zero')
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(min(a/c,a/d,b/c,b/d), max(a/c,a/d,b/c,b/d))
+
+q=interval(5,6)
+p=interval(1,3)
+print(q)
+print(p)
+print(q-p)
+print(q/p)
+print(q+p)
+print(q-p)
+
+#task 4:
+
+from scipy import *
+
+class interval:
+    def __init__ ( self , real1 , real2 ):
+        if isinstance ( real1, float) and isinstance ( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        elif isinstance( real1, float) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        else:
+            raise TypeError ('only integers and/or floats')
+    def __repr__ ( self ):
+        return '[{},{}]'. format (self.lower , self.upper)
+    def __add__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a+c,b+d)
+    def __sub__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a-d,b-c)
+    def __mul__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d))
+    def __truediv__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        elif c==0 or d==0:
+            raise TypeError('Cannot divide by zero')
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(min(a/c,a/d,b/c,b/d), max(a/c,a/d,b/c,b/d))
+    
+q=interval(0.,1.e+9)
+I1 = interval(1,4)
+I2 = interval(-2, -1) # [-2, -1] 
+print(I1)
+print(I2)
+print(I1 + I2) # [-1, 3] 
+print(I1 - I2) # [2, 6] 
+print(I1 * I2) # [-8, -1]
+print(I1 / I2) # [-4.,-0.5]
+
+#task 5:
+
+
+from scipy import *
+
+class interval:
+    def __init__ ( self , real1 , real2 ):
+        if isinstance ( real1, float) and isinstance ( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        elif isinstance( real1, float) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        else:
+            raise TypeError ('only integers and/or floats')
+    def __repr__ ( self ):
+        return '[{},{}]'. format (self.lower , self.upper)
+    def __add__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a+c,b+d)
+    def __sub__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a-d,b-c)
+    def __mul__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d))
+    def __truediv__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        elif c==0 or d==0:
+            raise TypeError('Cannot divide by zero')
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(min(a/c,a/d,b/c,b/d), max(a/c,a/d,b/c,b/d))
+    def __contains__(self, real3):
+        if real3>=self.lower and real3<=self.upper:
+            return True
+        else:
+            return False
+        
+q=interval(-15,-3)
+print(q)
+print(q.__contains__(3))
+    
+
+#task 6:
+
+
+from scipy import *
+
+class interval:
+    def __init__ ( self , real1 , real2 ):
+        if isinstance ( real1, float) and isinstance ( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)
+        elif isinstance( real1, int) and isinstance( real2, float):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        elif isinstance( real1, float) and isinstance( real2, int):
+            self.lower = min(real1,real2)
+            self.upper = max(real1,real2)    
+        else:
+            raise TypeError ('only integers and/or floats')
+    def __repr__ ( self ):
+        return '[{},{}]'. format (self.lower , self.upper)
+    def __add__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a+c,b+d)
+    def __sub__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a-d,b-c)
+    def __mul__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d))
+    def __contains__(self, real3):
+        if real3>=self.lower and real3<=self.upper:
+            return True
+        else:
+            return False
+    def __truediv__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        if c==0 or d==0:
+            raise ZeroDivisionError('Cannot divide by zero')
+        elif abs(c)<1.e-8 or abs(d)<1.e-8:
+            raise Exception('resulting interval would be infinitely large, denominators are too small')
+        elif abs(a)>1.e+8 or abs(b)>1.e+8:
+            raise Exception('resulting interval would be infinitely large, numerators are too large')
+        return interval(min(a/c,a/d,b/c,b/d), max(a/c,a/d,b/c,b/d))
+
+I1 = interval(1,4) #[1,4]
+I2 = interval(-2, -1) # [-2, -1] 
+print(I1)
+print(I2)
+print(I1 / I2) # [-4.,-0.5]
+#p=interval(1., 1.e+9)
+q=interval(0,1.)
+#print(p/I1)
+print(I1/q)
+
+
+
+#task 7:
+
+class interval:
+    def __init__ ( self , real1, real2=None):
+        if real2==None:
+            if isinstance (real1, float):
+                self.lower=real1
+                self.upper=real1
+            elif isinstance(real1, int):
+                self.lower = real1
+                self.upper = real1
+            else:
+                raise TypeError ('only integer or float')
+        else:
+            if isinstance ( real1, float) and isinstance ( real2, float):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)
+            elif isinstance( real1, int) and isinstance( real2, int):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)
+            elif isinstance( real1, int) and isinstance( real2, float):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)    
+            elif isinstance( real1, float) and isinstance( real2, int):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)    
+            else:
+                raise TypeError ('only integers and/or floats')
+    def __repr__ ( self ):
+        return '[{},{}]'. format (self.lower , self.upper)
+    def __add__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a+c,b+d)
+    def __sub__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(a-d,b-c)
+    def __mul__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        return interval(min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d))
+    def __contains__(self, real3):
+        if real3>=self.lower and real3<=self.upper:
+            return True
+        else:
+            return False
+    def __truediv__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        if c==0 or d==0:
+            raise ZeroDivisionError('Cannot divide by zero')
+        elif abs(c)<1.e-8 or abs(d)<1.e-8:
+            raise Exception('resulting interval would be infinitely large, denominators are too small')
+        elif abs(a)>1.e+8 or abs(b)>1.e+8:
+            raise Exception('resulting interval would be infinitely large, numerators are too large')
+        return interval(min(a/c,a/d,b/c,b/d), max(a/c,a/d,b/c,b/d))        
+q=interval(5.)
+print(q)
+        
+#task 8:
+
+class interval:
+    def __init__ ( self , real1, real2=None):
+        if real2==None:
+            if isinstance (real1, float):
+                self.lower=real1
+                self.upper=real1
+            elif isinstance(real1, int):
+                self.lower = real1
+                self.upper = real1
+            else:
+                raise TypeError ('only integer or float')
+        else:
+            if isinstance ( real1, float) and isinstance ( real2, float):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)
+            elif isinstance( real1, int) and isinstance( real2, int):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)
+            elif isinstance( real1, int) and isinstance( real2, float):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)    
+            elif isinstance( real1, float) and isinstance( real2, int):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)    
+            else:
+                raise TypeError ('only integers and/or floats')
+    def __repr__ ( self ):
+        return '[{},{}]'. format (self.lower , self.upper)
+    def __add__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+            return interval(a+c,b+d)
+        elif isinstance(other,int):
+            return interval(a+other,b+other)
+        elif isinstance(other,float):
+            return interval(a+other,b+other)
+        else:
+            raise TypeError('it has to be an interval, float or integer')
+    def __radd__(self,other):
+        return self + other
+    def __sub__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+            return interval(a-d,b-c)
+        elif isinstance(other,int):
+            return interval(a-other,b-other)
+        elif isinstance(other,float):
+            return interval(a-other,b-other)
+        else:
+            raise TypeError('it has to be an interval, float or integer')
+    def __rsub__(self,other):
+        return self - other
+    def __mul__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+            return interval(min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d))
+        elif isinstance(other,int):
+            return interval(a*other, b*other)
+        elif isinstance(other,float):
+            return interval(a*other, b*other)
+        else:
+            raise TypeError('it has to be an interval, flot or integer')
+    def __rmul__(self,other):
+        return self*other
+    def __contains__(self, real3):
+        if real3>=self.lower and real3<=self.upper:
+            return True
+        else:
+            return False
+    def __truediv__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        if c==0 or d==0:
+            raise ZeroDivisionError('Cannot divide by zero')
+        elif abs(c)<1.e-8 or abs(d)<1.e-8:
+            raise Exception('resulting interval would be infinitely large, denominators are too small')
+        elif abs(a)>1.e+8 or abs(b)>1.e+8:
+            raise Exception('resulting interval would be infinitely large, numerators are too large')
+        return interval(min(a/c,a/d,b/c,b/d), max(a/c,a/d,b/c,b/d)) 
+    def __pow__(self,n):
+        if n%2==0: #remainder after division by 2
+            a,b=self.lower,self.upper
+            if a<0 and b>0:
+                return interval(0,max(abs(a),abs(b))**n)
+            else:
+                return interval(min(abs(a),abs(b))**n,max(abs(a),abs(b))**n)
+        else:
+            a,b=self.lower,self.upper
+            return interval(a**n,b**n)
+q=interval(-3,-100)
+print(q)
+print(1+q)    
+print(1-q)
+print(-3*q)
+print(q**3)
+    
+#task 9:
+
+class interval:
+    def __init__ ( self , real1, real2=None):
+        if real2==None:
+            if isinstance (real1, float):
+                self.lower=real1
+                self.upper=real1
+            elif isinstance(real1, int):
+                self.lower = real1
+                self.upper = real1
+            else:
+                raise TypeError ('only integer or float')
+        else:
+            if isinstance ( real1, float) and isinstance ( real2, float):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)
+            elif isinstance( real1, int) and isinstance( real2, int):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)
+            elif isinstance( real1, int) and isinstance( real2, float):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)    
+            elif isinstance( real1, float) and isinstance( real2, int):
+                self.lower = min(real1,real2)
+                self.upper = max(real1,real2)    
+            else:
+                raise TypeError ('only integers and/or floats')
+    def __repr__ ( self ):
+        return '[{},{}]'. format (self.lower , self.upper)
+    def __add__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+            return interval(a+c,b+d)
+        elif isinstance(other,int):
+            return interval(a+other,b+other)
+        elif isinstance(other,float):
+            return interval(a+other,b+other)
+        else:
+            raise TypeError('it has to be an interval, float or integer')
+    def __radd__(self,other):
+        return self + other
+    def __sub__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+            return interval(a-d,b-c)
+        elif isinstance(other,int):
+            return interval(a-other,b-other)
+        elif isinstance(other,float):
+            return interval(a-other,b-other)
+        else:
+            raise TypeError('it has to be an interval, float or integer')
+    def __rsub__(self,other):
+        return self - other
+    def __mul__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+            return interval(min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d))
+        elif isinstance(other,int):
+            return interval(a*other, b*other)
+        elif isinstance(other,float):
+            return interval(a*other, b*other)
+        else:
+            raise TypeError('it has to be an interval, flot or integer')
+    def __rmul__(self,other):
+        return self*other
+    def __contains__(self, real3):
+        if real3>=self.lower and real3<=self.upper:
+            return True
+        else:
+            return False
+    def __truediv__(self,other):
+        a,b=self.lower,self.upper
+        if isinstance(other,interval):
+            c,d=other.lower,other.upper
+        else:
+            raise TypeError('it has to be an interval')
+        if c==0 or d==0:
+            raise ZeroDivisionError('Cannot divide by zero')
+        elif abs(c)<1.e-8 or abs(d)<1.e-8:
+            raise Exception('resulting interval would be infinitely large, denominators are too small')
+        elif abs(a)>1.e+8 or abs(b)>1.e+8:
+            raise Exception('resulting interval would be infinitely large, numerators are too large')
+        return interval(min(a/c,a/d,b/c,b/d), max(a/c,a/d,b/c,b/d)) 
+    def __pow__(self,n):
+        if n%2==0: #remainder after division by 2
+            a,b=self.lower,self.upper
+            if a<0 and b>0:
+                return interval(0,max(abs(a),abs(b))**n)
+            else:
+                return interval(min(abs(a),abs(b))**n,max(abs(a),abs(b))**n)
+        else:
+            a,b=self.lower,self.upper
+            return interval(a**n,b**n)
+q=interval(-3,-100)
+print(q)
+print(q**3)
+    
+#Task 10:
+
+from matplotlib.pyplot import*
+%matplotlib inline
+
+xlist=linspace(0,1,20)
+ilist=[]
+plist=[]
+yl=[]
+yu=[]
+for i in xlist:
+    xu=i+0.5
+    xl=i
+    ilist.append(interval(xl,xu))
+    
+for n in range(len(ilist)):
+    p=3*ilist[n]**3 -2*ilist[n]**2 - 5*ilist[n] -1
+    plist.append(p)
+    
+for t in range(len(plist)):
+    yl.append(plist[t].lower)
+    yu.append(plist[t].upper)
+
+plot(xlist,yu)
+plot(xlist,yl)
